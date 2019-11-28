@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Nov 28 22:05:57 2019
+
+@author: bhavana
+"""
+""" pip install html5lib
+    pip install bs4 """
+    
+""" bs4 - beautifulsoup4"""
+
+import requests
+from bs4 import BeautifulSoup
+import csv
+
+url ="http://www.takeabreaktours.com/"
+r = requests.get(url)
+soup = BeautifulSoup(r.content,"html5lib")
+
+#print(soup.prettify())
+
+quotes=[] # we just created an empty list
+
+quotes = soup.findAll('p') # Find div tag with attribute id as container
+
+try:
+
+    filename = 'travel.txt'
+    fn = open(filename,"w+")
+    for quote in quotes:
+        fn.writelines(quote)
+    fn.close()
+except:
+    print("Exception")
+
+
+
